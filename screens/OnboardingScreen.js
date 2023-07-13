@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { View, Text, TextInput, Pressable, StyleSheet, SafeAreaView, Image, } from "react-native";
 import Animated, { FadeIn } from "react-native-reanimated";
-
+//onboarding.js
 export default function OnboardingScreen(props) {
     const { navigation, handleOnboardComplete } = props;
 

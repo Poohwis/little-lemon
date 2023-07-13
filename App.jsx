@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomSplashScreen from './screens/CustomSplashScreen';
 
 const Stack = createNativeStackNavigator();
-
+//app.js
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isOnboardComplete, setIsOnboardComplete] = useState(false);
@@ -67,7 +67,7 @@ export default function App() {
         {isOnboardComplete ? (
           <>
             <Stack.Screen name='Home' options={{ headerShown: false }}>
-              {(props) => <HomeScreen {...props} handleOnboardReset={handleOnboardReset} />}
+              {(props) => <HomeScreen {...props} />}
             </Stack.Screen>
             <Stack.Screen name='Profile' options={{ headerShown: false }}>
               {(props) => <ProfileScreen {...props} handleOnboardReset={handleOnboardReset}/>}

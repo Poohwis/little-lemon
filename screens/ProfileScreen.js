@@ -5,9 +5,9 @@ import { Avatar, Icon } from '@rneui/themed';
 import { MaskedTextInput } from "react-native-mask-text";
 import { launchImageLibrary } from "react-native-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+//profilescreen.js
 export default function ProfileScreen(props) {
-    const { handleOnboardReset } = props
+    const { navigation, handleOnboardReset } = props
     const [userData, setUserData] = useState({
         firstName: '',
         lastName: '',
@@ -123,7 +123,7 @@ export default function ProfileScreen(props) {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity style={styles.backHomeButton}>
+                <TouchableOpacity style={styles.backHomeButton} onPress={() => { navigation.navigate('Home') }}>
                     <Icon size={10} name="chevron-left" type="font-awesome" />
                     <Text style={styles.backhomeTextAdjust}>Home</Text>
                 </TouchableOpacity>
