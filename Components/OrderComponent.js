@@ -1,28 +1,37 @@
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
-import { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity } from "react-native";
 import { StyleSheet } from "react-native";
-// import axios from 'axios';
 
-export default OrderComponent = () => {
-    const API_URL = 'https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/capstone.json'
-    const category = ['Starters', 'Mains', 'Dessert', 'Drinks']
+
+export default OrderComponent = (props) => {
+    const { handleCategoryToggle, isCategoryToggle } = props
+
     return (
         <View style={styles.container}>
             <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'black', margin: 10 }}>ORDER FOR DELIVERY!</Text>
             <View style={styles.categoryContainer}>
                 {category.map(pref => (
                     <TouchableOpacity
-                        key={pref}
+                        onPress={() => {
+                            handleCategoryToggle(pref.name)
+                        }}
+                        key={pref.name}
                         activeOpacity={0.7}
-                        style={styles.categoryButton}>
-                        <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#495e57' }}>{pref}</Text>
+                        style={[styles.categoryButton,
+                        {
+                            backgroundColor:
+                                isCategoryToggle[pref.name] ? pref.color : '#edefee'
+                        }]}>
+                        <Text
+                            style={{
+                                fontSize: 16,
+                                fontWeight: 'bold',
+                                color: isCategoryToggle[pref.name] ? '#ffffff' : '#495e57'
+                            }}>
+                            {pref.name.charAt(0).toUpperCase() + pref.name.slice(1)}
+                        </Text>
                     </TouchableOpacity>
                 ))}
             </View>
-            <FlatList
-            scrollEnabled={false}>
-                
-            </FlatList>
         </View>
     )
 }
@@ -38,10 +47,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     categoryButton: {
-        backgroundColor: '#edefee',
         justifyContent: 'center',
         paddingVertical: 8,
         paddingHorizontal: 10,
         borderRadius: 14,
     },
 })
+
+const category = [
+    { name: 'starters', color: '#963f00' },
+    { name: 'mains', color: '#ffa06e' },
+    { name: 'dessert', color: '#c39c00' },
+    { name: 'drinks', color: '#d8d675' }]

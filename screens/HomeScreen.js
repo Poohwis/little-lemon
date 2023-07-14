@@ -1,9 +1,13 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { View, Text, TextInput, Pressable, StyleSheet, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native";
 import { Avatar } from "react-native-elements";
 import HeroComponent from "../Components/HeroComponent";
 import OrderComponent from "../Components/OrderComponent";
+import MenuListComponent from "../Components/MenuListComponent";
+import axios from "axios";
+
+
 //homescreen.js
 export default function HomeScreen({ navigation, route }) {
     const [profileButton, setProfileButton] = useState({
@@ -11,6 +15,19 @@ export default function HomeScreen({ navigation, route }) {
         firstName: '',
         lastName: ''
     })
+    const [isCategoryToggle, setIsCategoryToggle] = useState({
+        starters: false,
+        mains: false,
+        dessert: false,
+        drinks: false
+    })
+
+    const handleCategoryToggle = (name) => {
+        setIsCategoryToggle((prevState)=>({
+            ...prevState,
+            [name] : !prevState[name]
+        }))
+    }
 
     useEffect(() => {
         getProfileData();
@@ -67,7 +84,8 @@ export default function HomeScreen({ navigation, route }) {
             </View>
             <ScrollView>
                 <HeroComponent />
-                <OrderComponent />
+                <OrderComponent handleCategoryToggle={handleCategoryToggle} isCategoryToggle={isCategoryToggle} />
+                <MenuListComponent />
             </ScrollView>
         </SafeAreaView>
     )

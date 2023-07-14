@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { View, Text, Image } from "react-native";
 import { Icon } from "react-native-elements";
@@ -7,13 +6,13 @@ export default HeroComponent = () => {
     return (
         <View style={styles.container}>
             <Text
-                style={{ fontSize: 40, color: '#f4ce14', marginLeft: 15 }}>
+                style={{ fontSize: 40, color: '#f4ce14', marginLeft: 15, fontWeight: 'bold' }}>
                 Little Lemon
             </Text>
             <View style={{ flex: 1, flexDirection: 'row', marginLeft: 15 }}>
                 <View style={{ flex: 1.25 }}>
                     <Text
-                        style={{ fontSize: 35, color: '#ffffff', marginTop: -14, marginBottom: 14}}>
+                        style={{ fontSize: 35, color: '#ffffff', marginTop: -14, marginBottom: 14, fontWeight: '500'}}>
                         Chicago
                     </Text>
                     <Text
