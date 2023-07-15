@@ -12,22 +12,22 @@ export default OrderComponent = (props) => {
                 {category.map(pref => (
                     <TouchableOpacity
                         onPress={() => {
-                            handleCategoryToggle(pref.name)
+                            handleCategoryToggle(pref.category)
                         }}
-                        key={pref.name}
+                        key={pref.category}
                         activeOpacity={0.7}
                         style={[styles.categoryButton,
                         {
                             backgroundColor:
-                                isCategoryToggle[pref.name] ? pref.color : '#edefee'
+                                isCategoryToggle[pref.category] ? pref.color : '#edefee'
                         }]}>
                         <Text
                             style={{
                                 fontSize: 16,
                                 fontWeight: 'bold',
-                                color: isCategoryToggle[pref.name] ? '#ffffff' : '#495e57'
+                                color: isCategoryToggle[pref.category] ? '#ffffff' : '#495e57'
                             }}>
-                            {pref.name.charAt(0).toUpperCase() + pref.name.slice(1)}
+                            {pref.category.charAt(0).toUpperCase() + pref.category.slice(1)}
                         </Text>
                     </TouchableOpacity>
                 ))}
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     },
 })
 
-const category = [
-    { name: 'starters', color: '#963f00' },
-    { name: 'mains', color: '#ffa06e' },
-    { name: 'dessert', color: '#c39c00' },
-    { name: 'drinks', color: '#d8d675' }]
+export const category = [
+    { category: 'starters', color: '#963f00' },
+    { category: 'mains', color: '#c39c00' },
+    { category: 'desserts', color: '#d8d675' },
+    { category: 'drinks', color: '#ffa06e' }]

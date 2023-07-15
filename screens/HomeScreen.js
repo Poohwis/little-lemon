@@ -1,12 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { View, Text, StyleSheet, SafeAreaView, Image, TouchableOpacity, ScrollView } from "react-native";
 import { Avatar } from "react-native-elements";
-import HeroComponent from "../Components/HeroComponent";
+import BannerComponent from "../Components/BannerComponent";
 import OrderComponent from "../Components/OrderComponent";
 import MenuListComponent from "../Components/MenuListComponent";
 import axios from "axios";
-
+import debounce from 'lodash.debounce';
 
 //homescreen.js
 export default function HomeScreen({ navigation, route }) {
@@ -18,9 +18,23 @@ export default function HomeScreen({ navigation, route }) {
     const [isCategoryToggle, setIsCategoryToggle] = useState({
         starters: false,
         mains: false,
-        dessert: false,
+        desserts: false,
         drinks: false
     })
+
+    const [searchBarText, setSearchBarText] = useState('');
+    const [query, setQuery] = useState('')
+
+    const lookup = useCallback((q) => {
+        setQuery(q);
+      }, []);
+
+    const debouncedLookup = useMemo(() => debounce(lookup, 500), [lookup]);
+
+    const handleSearchBarChange = (text) => {
+        setSearchBarText(text);
+        debouncedLookup(text)
+    }
 
     const handleCategoryToggle = (name) => {
         setIsCategoryToggle((prevState)=>({
@@ -83,9 +97,9 @@ export default function HomeScreen({ navigation, route }) {
                 </TouchableOpacity>
             </View>
             <ScrollView>
-                <HeroComponent />
+                <BannerComponent handleSearchBarChange={handleSearchBarChange} searchBarText={searchBarText}/>
                 <OrderComponent handleCategoryToggle={handleCategoryToggle} isCategoryToggle={isCategoryToggle} />
-                <MenuListComponent />
+                <MenuListComponent isCategoryToggle={isCategoryToggle} searchBarText={searchBarText}/>
             </ScrollView>
         </SafeAreaView>
     )
